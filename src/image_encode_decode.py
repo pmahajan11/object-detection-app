@@ -7,11 +7,6 @@ import time
 
 
 
-# creare a random numpy array of RGB values, 0-255
-# arr = 255 * numpy.random.rand(20, 20, 3)
-arr = cv2.imread("./car.jpg")
-
-
 def array_to_base64(image):
     im = Image.fromarray(image.astype("uint8"))
     rawBytes = io.BytesIO()
@@ -27,6 +22,9 @@ def base64_to_array(base64_string):
 
 
 if __name__ == "__main__":
+    # arr = cv2.imread("./car.jpg")
+    arr = cv2.imread("./toothbrush.png")
+    
     st = time.time()
     img = base64_to_array(array_to_base64(arr))
     tt = time.time() - st

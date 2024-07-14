@@ -29,13 +29,13 @@ def draw_boxes(boxes, classes, labels, image, scores):
     for i, box in enumerate(boxes):
         color = (0, 255, 0) # green
         cv2.rectangle(
-            image,
-            (int(box[0]), int(box[1])),
-            (int(box[2]), int(box[3])),
-            color, 3
+            img=image,
+            pt1=(int(box[0]), int(box[1])),
+            pt2=(int(box[2]), int(box[3])),
+            color=color, thickness=2
         )
-        cv2.putText(image, f"{classes[i].upper()} {scores[i]:.3f}", (int(box[0]), int(box[1]-5)),
-                    cv2.FONT_HERSHEY_SIMPLEX, 1, color, thickness=3, 
+        cv2.putText(img=image, text=f"{classes[i].upper()} {scores[i]:.3f}", org=(int(box[0]), int(box[1]-5)),
+                    fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=color, thickness=3, 
                     lineType=cv2.LINE_AA)
     return image
 
@@ -83,7 +83,7 @@ model.eval().to(device)
 
 if __name__ == "__main__":
 
-    final_image = run_object_detection(cv2.imread("./car.jpg"))
+    final_image = run_object_detection(cv2.imread("./toothbrush.png"))
 
     cv2.imshow("Image", final_image)
 
