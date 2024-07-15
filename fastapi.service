@@ -1,0 +1,13 @@
+[Unit]
+Description=fastapi object detection api
+After=network.target
+
+[Service]
+User=odfastapi
+Group=odfastapi
+Workingdirectory=/home/odfastapi/object_detection_app/object-detection-app/src
+Environment="PATH=/home/odfastapi/object_detection_app/venv/bin"
+ExecStart=/home/odfastapi/object_detection_app/venv/bin/gunicorn -w 2 -k uvicorn.workers.UvicornWorker main:app --bind 127.0.0.1:800
+
+[Install]
+WantedBy=multi-user.target
