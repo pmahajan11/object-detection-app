@@ -35,7 +35,7 @@ if picture:
     if response.status_code == 200:
         response_json = response.json()
         final_image = base64_to_array(response_json["encoded_image"])
-        container.write(f'Response time: {response_json["response_time"]:.3f} seconds')
+        # container.write(f'Response time: {response_json["response_time"]:.3f} seconds')
         container.image(final_image)
     else:
         container.write("Something went wrong!")

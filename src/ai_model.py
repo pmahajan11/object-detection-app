@@ -20,11 +20,11 @@ def predict(image, model, device, detection_threshold):
     pred_bboxes = outputs[0]['boxes'].detach().cpu().numpy()
     # get boxes above the threshold score
     boxes = pred_bboxes[pred_scores >= detection_threshold].astype(np.int32)
-    return boxes, pred_classes, outputs[0]['labels'], pred_scores
+    return boxes, pred_classes, pred_scores
 
 
 
-def draw_boxes(boxes, classes, labels, image, scores):
+def draw_boxes(boxes, classes, image, scores):
     # image = cv2.cvtColor(np.asarray(image), cv2.COLOR_BGR2RGB)
     for i, box in enumerate(boxes):
         color = (0, 255, 0) # green
@@ -43,8 +43,8 @@ def draw_boxes(boxes, classes, labels, image, scores):
 
 def run_object_detection(image):
     # read the image and run the inference for detections
-    boxes, classes, labels, scores = predict(image, model, device, 0.7)
-    image = draw_boxes(boxes, classes, labels, image, scores)
+    boxes, classes, scores = predict(image, model, device, 0.7)
+    image = draw_boxes(boxes, classes, image, scores)
     return image
 
 
